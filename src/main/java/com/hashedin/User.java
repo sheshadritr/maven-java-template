@@ -1,17 +1,18 @@
 package com.hashedin;
 
 public class User {
-	private String id;
+	private String userId;
 	private String age;
 	private String gender;
 	private String occupation;
 	private String zipcode;
 	
-	public String getId() {
-		return id;
+	
+	public String getUserId() {
+		return userId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 	public String getAge() {
 		return age;
@@ -37,10 +38,9 @@ public class User {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
-	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", age=" + age + ", gender=" + gender
+		return "User [userId=" + userId + ", age=" + age + ", gender=" + gender
 				+ ", occupation=" + occupation + ", zipcode=" + zipcode + "]";
 	}
 

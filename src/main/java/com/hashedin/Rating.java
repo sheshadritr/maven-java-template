@@ -1,22 +1,23 @@
 package com.hashedin;
 
 public class Rating {
-	private String userId;
-	private String movieId;
+	private String rUserId;
+	private String rMovieId;
 	private String rating;
 	private String timeStamp;
 	
-	public String getUserId() {
-		return userId;
+	
+	public String getrUserId() {
+		return rUserId;
 	}
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setrUserId(String rUserId) {
+		this.rUserId = rUserId;
 	}
-	public String getMovieId() {
-		return movieId;
+	public String getrMovieId() {
+		return rMovieId;
 	}
-	public void setMovieId(String movieId) {
-		this.movieId = movieId;
+	public void setrMovieId(String rMovieId) {
+		this.rMovieId = rMovieId;
 	}
 	public String getRating() {
 		return rating;
@@ -32,8 +33,8 @@ public class Rating {
 	}
 	@Override
 	public String toString() {
-		return "Rating [userId=" + userId + ", movieId=" + movieId
+		return "Rating [rUserId=" + rUserId + ", rMovieId=" + rMovieId
 				+ ", rating=" + rating + ", timeStamp=" + timeStamp + "]";
 	}
-
+	
 }
