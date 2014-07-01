@@ -44,7 +44,6 @@ public class MovieManager {
 		}
 		return userMap;
 	}
-
 	private User parseUserDataFile(String user) {
 		StringTokenizer token = new StringTokenizer(user, "|");
 		User u = new User();
@@ -68,7 +67,6 @@ public class MovieManager {
 		}
 		return ratingMap;
 	}
-
 	private Rating parseRatingDataFile(String rating) {
 		rating = rating.replaceAll(" ", "|");
 		rating = rating.replaceAll("\t", "|");
@@ -82,11 +80,32 @@ public class MovieManager {
 	}
 	
 	
+	public Map<String, Genre> getGenres(InputStream genreStream) throws IOException {
+		Map<String, Genre> genreMap = new HashMap<>();
+		@SuppressWarnings("unchecked")
+		List<String> genres = IOUtils.readLines(genreStream);
+		for (String genre : genres) {
+			Genre g = parseGenreDataFile(genre);
+			genreMap.put(g.getgName(), g);
+			System.out.println(g);
+		}
+		return genreMap;
+	}
+	private Genre parseGenreDataFile(String genre) {
+		StringTokenizer token = new StringTokenizer(genre, "|");
+		Genre g = new Genre();
+		g.setgName(token.nextToken());
+		g.setgIndex(token.nextToken());
+		return g;
+	}
+	
+	
 	public static void main(String[] args) throws IOException {
 		MovieManager mg = new MovieManager();
-//		Map<String, Movie> movieMap = mg.getMovies(mg.getClass().getClassLoader().getResourceAsStream("movie.data"));
-//		Map<String, User> userMap = mg.getUsers(mg.getClass().getClassLoader().getResourceAsStream("user.data"));
+		Map<String, Movie> movieMap = mg.getMovies(mg.getClass().getClassLoader().getResourceAsStream("movie.data"));
+		Map<String, User> userMap = mg.getUsers(mg.getClass().getClassLoader().getResourceAsStream("user.data"));
 		Map<String, Rating> ratingMap = mg.getRatings(mg.getClass().getClassLoader().getResourceAsStream("ratings.data"));
+		Map<String, Genre> genreMap = mg.getGenres(mg.getClass().getClassLoader().getResourceAsStream("genre.data"));
 		
 	}
 }

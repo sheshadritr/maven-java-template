@@ -45,5 +45,8 @@ public class AppTest
     	
     	Map<String, Rating> ratingMap = mm.getRatings(mm.getClass().getClassLoader().getResourceAsStream("test_ratings.data"));
     	assertEquals(ratingMap.size(),6);
+    	
+    	Map<String, Genre> genreMap = mm.getGenres(mm.getClass().getClassLoader().getResourceAsStream("test_genre.data"));
+    	assertEquals(genreMap.size(),19);
     }
 }
