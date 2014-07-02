@@ -38,5 +38,12 @@ public class Rating {
 				+ ", ratingTimeStamp=" + ratingTimeStamp + "]";
 	}
 	
+	public Rating() {
+		super();
+		this.ratingUserId = "";
+		this.ratingMovieId = "";
+		this.ratingScore = 0;
+		this.ratingTimeStamp = "";
+	}
 	
 }

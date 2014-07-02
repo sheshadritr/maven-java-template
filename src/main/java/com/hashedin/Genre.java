@@ -21,11 +21,7 @@ public class Genre {
 		return "Genre [genreName=" + genreName + ", genreIndex=" + genreIndex
 				+ "]";
 	}
-	public Genre(String genreName, int genreIndex) {
-		super();
-		this.genreName = genreName;
-		this.genreIndex = genreIndex;
-	}
+
 	public Genre() {
 		super();
 		this.genreName = "";

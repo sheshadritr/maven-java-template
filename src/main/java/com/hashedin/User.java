@@ -45,25 +45,14 @@ public class User {
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
-	public void addActivity() {
-		this.activity++;
-	}
+	
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", age=" + age + ", gender=" + gender
 				+ ", occupation=" + occupation + ", zipcode=" + zipcode
 				+ ", activity=" + activity + "]";
 	}
-	public User(String userId, String age, String gender, String occupation,
-			String zipcode, int activity) {
-		super();
-		this.userId = userId;
-		this.age = age;
-		this.gender = gender;
-		this.occupation = occupation;
-		this.zipcode = zipcode;
-		this.activity = activity;
-	}
+
 	public User() {
 		super();
 		this.userId = "";
@@ -74,4 +63,7 @@ public class User {
 		this.activity = 0;
 	}
 	
+	public void addActivity() {
+		this.activity++;
+	}
 }

@@ -1,14 +1,9 @@
 package com.hashedin;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
 
 
 public class MovieFreak {
@@ -81,7 +76,7 @@ public class MovieFreak {
 	}
 	
 	public void updateMovieRatings() {
-		int i=0, j=0, ratingValue=0;
+		int i=0, ratingValue=0;
 		String movieid;
 		
 		while (i < this.ratingList.size()) {
@@ -140,13 +135,14 @@ public class MovieFreak {
 
 	public void getTopRankedMovie(Map<String,Movie> movieMap) {
 		String tempMovieId, topMovieId="None";
-		int tempAvgRating, maxAvgRating=0;
+		int tempAvgRating=0, maxAvgRating=0;
 		this.updateMovieRatings();
 		
 		Map<String,Movie> map = movieMap;
 		for (Map.Entry<String,Movie> entry : map.entrySet()) {
 			tempMovieId = entry.getKey();
 		    tempAvgRating = entry.getValue().getAverageRating();
+		    //System.out.println("gTRM checked " + tempMovieId + " with rating " + tempAvgRating);
 		    if (maxAvgRating < tempAvgRating) {
 		    	topMovieId = tempMovieId;
 		    	maxAvgRating = tempAvgRating;
@@ -155,29 +151,37 @@ public class MovieFreak {
 		System.out.println("The top movie id for above selection is " + topMovieId + " with rating of " + maxAvgRating + ".");	
 	}
 	
-	@SuppressWarnings("unused")
-	public void getTopMovieByGenre() {
-		int genreIndex;
-		String genreName, tempMovieId;
+	public Map<String, Movie> getMovieByGenre(String genreName, Map<String, Movie> selectedmap) {
+		String tempMovieId, tempGenreValue;
 		Movie tempMovieValue;
+		
+		Map<String, Movie> innermap = this.movieMap;
+		for (Map.Entry<String,Movie> innerentry : innermap.entrySet()) {
+			tempMovieId = innerentry.getKey();
+			tempMovieValue = innerentry.getValue();
+			for (int i = 0; i < tempMovieValue.getGenre().size(); i++) {
+				tempGenreValue = tempMovieValue.getGenre().get(i);
+				//System.out.println("In movie " + tempMovieId + " compared " + genreName + " with " + tempMovieValue.getGenre().get(i));
+				if ((genreName).equals(tempGenreValue)) {
+				    selectedmap.put(tempMovieId, tempMovieValue);
+				}
+			}
+			
+		}
+		return selectedmap;
+	}
+	
+	public void getTopMovieByGenre() {
+		String genreName;
 		
 		Map<Integer, Genre> map = this.genreMap;
 		for (Map.Entry<Integer, Genre> entry : map.entrySet()) {
-			genreIndex = entry.getKey();
+			Map<String, Movie> selectedmap = null;
+			selectedmap = new HashMap<String, Movie>();
 		    genreName = entry.getValue().getGenreName();
-		    
-		    Map<String, Movie> innermap = new HashMap<String, Movie>();
-		    innermap = this.movieMap;
-			for (Map.Entry<String,Movie> innerentry : innermap.entrySet()) {
-				tempMovieId = innerentry.getKey();
-			    tempMovieValue = innerentry.getValue();
-			    if ((genreName).equals(innerentry.getValue().getGenre())) {
-			    	innermap.put(tempMovieId, tempMovieValue);
-			    }
-			}
-			getTopRankedMovie(innermap);
 			System.out.println("The Selected Genre is: " + genreName + ".");
-			innermap=null;
+		    selectedmap = this.getMovieByGenre(genreName, selectedmap);
+		    this.getTopRankedMovie(selectedmap);
 		}
 	}
 	

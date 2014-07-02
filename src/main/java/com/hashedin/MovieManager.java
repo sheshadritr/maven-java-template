@@ -12,6 +12,7 @@ import org.apache.commons.io.IOUtils;
 
 public class MovieManager {
 
+	
 	public Map<String, Movie> getMovieMap(InputStream movieStream, Map<Integer, Genre> genreMap) throws IOException {
 		Map<String, Movie> movieMap = new HashMap<>();
 		@SuppressWarnings("unchecked")
