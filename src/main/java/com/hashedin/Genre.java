@@ -1,24 +1,35 @@
 package com.hashedin;
 
 public class Genre {
-	private String gName;
-	private String gIndex;
+	private int genreIndex;
+	private String genreName;
 	
-	public String getgName() {
-		return gName;
+	public String getGenreName() {
+		return genreName;
 	}
-	public void setgName(String gName) {
-		this.gName = gName;
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
 	}
-	public String getgIndex() {
-		return gIndex;
+	public int getGenreIndex() {
+		return genreIndex;
 	}
-	public void setgIndex(String gIndex) {
-		this.gIndex = gIndex;
+	public void setGenreIndex(int genreIndex) {
+		this.genreIndex = genreIndex;
 	}
 	@Override
 	public String toString() {
-		return "Genre [gName=" + gName + ", gIndex=" + gIndex + "]";
+		return "Genre [genreName=" + genreName + ", genreIndex=" + genreIndex
+				+ "]";
+	}
+	public Genre(String genreName, int genreIndex) {
+		super();
+		this.genreName = genreName;
+		this.genreIndex = genreIndex;
+	}
+	public Genre() {
+		super();
+		this.genreName = "";
+		this.genreIndex = -1;
 	}
 	
 }

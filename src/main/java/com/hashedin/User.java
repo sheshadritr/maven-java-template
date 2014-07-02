@@ -6,6 +6,7 @@ public class User {
 	private String gender;
 	private String occupation;
 	private String zipcode;
+	private int activity;
 	
 	
 	public String getUserId() {
@@ -38,10 +39,36 @@ public class User {
 	public void setZipcode(String zipcode) {
 		this.zipcode = zipcode;
 	}
+	public int getActivity() {
+		return activity;
+	}
+	public void setActivity(int activity) {
+		this.activity = activity;
+	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", age=" + age + ", gender=" + gender
-				+ ", occupation=" + occupation + ", zipcode=" + zipcode + "]";
+				+ ", occupation=" + occupation + ", zipcode=" + zipcode
+				+ ", activity=" + activity + "]";
 	}
-
+	public User(String userId, String age, String gender, String occupation,
+			String zipcode, int activity) {
+		super();
+		this.userId = userId;
+		this.age = age;
+		this.gender = gender;
+		this.occupation = occupation;
+		this.zipcode = zipcode;
+		this.activity = activity;
+	}
+	public User() {
+		super();
+		this.userId = "";
+		this.age = "";
+		this.gender = "";
+		this.occupation = "";
+		this.zipcode = "";
+		this.activity = 0;
+	}
+	
 }

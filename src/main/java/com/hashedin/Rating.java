@@ -1,40 +1,42 @@
 package com.hashedin;
 
 public class Rating {
-	private String rUserId;
-	private String rMovieId;
-	private String rating;
-	private String timeStamp;
+	private String ratingUserId;
+	private String ratingMovieId;
+	private int ratingScore;
+	private String ratingTimeStamp;
 	
+	public String getRatingUserId() {
+		return ratingUserId;
+	}
+	public void setRatingUserId(String ratingUserId) {
+		this.ratingUserId = ratingUserId;
+	}
+	public String getRatingMovieId() {
+		return ratingMovieId;
+	}
+	public void setRatingMovieId(String ratingMovieId) {
+		this.ratingMovieId = ratingMovieId;
+	}
 	
-	public String getrUserId() {
-		return rUserId;
+	public int getRatingScore() {
+		return ratingScore;
 	}
-	public void setrUserId(String rUserId) {
-		this.rUserId = rUserId;
+	public void setRatingScore(int ratingScore) {
+		this.ratingScore = ratingScore;
 	}
-	public String getrMovieId() {
-		return rMovieId;
+	public String getRatingTimeStamp() {
+		return ratingTimeStamp;
 	}
-	public void setrMovieId(String rMovieId) {
-		this.rMovieId = rMovieId;
-	}
-	public String getRating() {
-		return rating;
-	}
-	public void setRating(String rating) {
-		this.rating = rating;
-	}
-	public String getTimeStamp() {
-		return timeStamp;
-	}
-	public void setTimeStamp(String timeStamp) {
-		this.timeStamp = timeStamp;
+	public void setRatingTimeStamp(String ratingTimeStamp) {
+		this.ratingTimeStamp = ratingTimeStamp;
 	}
 	@Override
 	public String toString() {
-		return "Rating [rUserId=" + rUserId + ", rMovieId=" + rMovieId
-				+ ", rating=" + rating + ", timeStamp=" + timeStamp + "]";
+		return "Rating [ratingUserId=" + ratingUserId + ", ratingMovieId="
+				+ ratingMovieId + ", ratingScore=" + ratingScore
+				+ ", ratingTimeStamp=" + ratingTimeStamp + "]";
 	}
+	
 	
 }
