@@ -9,7 +9,7 @@ public class Movie {
 	private String url;
 	private int sumOfRatings;
 	private int noOfRatings;
-	private int averageRating;
+	private float averageRating;
 	private List<String> genre;
 	
 	public String getMovieId() {
@@ -54,10 +54,10 @@ public class Movie {
 	public void setGenre(List<String> genre) {
 		this.genre = genre;
 	}
-	public int getAverageRating() {
+	public float getAverageRating() {
 		return averageRating;
 	}
-	public void setAverageRating(int averageRating) {
+	public void setAverageRating(float averageRating) {
 		this.averageRating = averageRating;
 	}
 	
@@ -66,7 +66,7 @@ public class Movie {
 		this.sumOfRatings = this.sumOfRatings + ratingvalue;
 	}
 	public void updateAvgRating() {
-		this.averageRating = this.sumOfRatings / this.noOfRatings;
+		this.averageRating = (float) this.sumOfRatings / this.noOfRatings;
 	}
 	
 	@Override

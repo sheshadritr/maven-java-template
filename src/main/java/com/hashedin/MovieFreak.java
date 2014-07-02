@@ -135,8 +135,8 @@ public class MovieFreak {
 
 	public void getTopRankedMovie(Map<String,Movie> movieMap) {
 		String tempMovie, topMovie="None";
-		int tempAvgRating=0, maxAvgRating=0;
-		this.updateMovieRatings();
+		float tempAvgRating=0, maxAvgRating=0;
+		//this.updateMovieRatings();
 		
 		Map<String,Movie> map = movieMap;
 		for (Map.Entry<String,Movie> entry : map.entrySet()) {
