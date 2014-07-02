@@ -123,32 +123,32 @@ public class MovieFreak {
 		
 		Map<String,Movie> map = this.movieMap;
 		for (Map.Entry<String,Movie> entry : map.entrySet()) {
-			tempMovieId = entry.getKey();
 		    tempNoOfRatings = entry.getValue().getNoOfRatings();
+		    tempMovieId = entry.getValue().getTitle();
 		    if (maxNoOfRatings < tempNoOfRatings) {
 		    	popMovieId = tempMovieId;
 				maxNoOfRatings = tempNoOfRatings;
 		    }
 		}
-		System.out.println("The most watched movie id is "+ popMovieId);
+		System.out.println("The most watched movie is "+ popMovieId);
 	}
 
 	public void getTopRankedMovie(Map<String,Movie> movieMap) {
-		String tempMovieId, topMovieId="None";
+		String tempMovie, topMovie="None";
 		int tempAvgRating=0, maxAvgRating=0;
 		this.updateMovieRatings();
 		
 		Map<String,Movie> map = movieMap;
 		for (Map.Entry<String,Movie> entry : map.entrySet()) {
-			tempMovieId = entry.getKey();
 		    tempAvgRating = entry.getValue().getAverageRating();
-		    //System.out.println("gTRM checked " + tempMovieId + " with rating " + tempAvgRating);
+		    tempMovie = entry.getValue().getTitle();
+		    //System.out.println("gTRM checked " + tempMovie + " with rating " + tempAvgRating);
 		    if (maxAvgRating < tempAvgRating) {
-		    	topMovieId = tempMovieId;
+		    	topMovie = tempMovie;
 		    	maxAvgRating = tempAvgRating;
 		    }
 		}
-		System.out.println("The top movie id for above selection is " + topMovieId + " with rating of " + maxAvgRating + ".");	
+		System.out.println("The top movie for above selection is " + topMovie + " with rating of " + maxAvgRating + ".");	
 	}
 	
 	public Map<String, Movie> getMovieByGenre(String genreName, Map<String, Movie> selectedmap) {
