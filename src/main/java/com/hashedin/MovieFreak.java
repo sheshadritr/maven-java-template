@@ -3,6 +3,7 @@ package com.hashedin;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -62,6 +63,12 @@ public class MovieFreak {
 		
 	}
 	
+	
+	/*
+	 * 
+	 * Updation Functions
+	 * 
+	 */
 	public void updateUserActivity() {
 		int i=0;
 		String userid;
@@ -72,7 +79,30 @@ public class MovieFreak {
 			i++;
 		}
 	}
-
+	
+	public void updateMovieRatings() {
+		int i=0, j=0, ratingValue=0;
+		String movieid;
+		
+		while (i < this.ratingList.size()) {
+			movieid = this.ratingList.get(i).getRatingMovieId();
+			ratingValue = this.ratingList.get(i).getRatingScore();
+			this.movieMap.get(movieid).updateRatings(ratingValue);
+			i++;
+		}
+		
+		Map<String,Movie> map = this.movieMap;
+		for (Map.Entry<String,Movie> entry : map.entrySet()) {
+		    entry.getValue().updateAvgRating();
+		}
+	}
+	
+	/*
+	 * 
+	 * Warmup Functions
+	 * 
+	 */
+	
 	public void getMostActiveUser() {
 		int maxActivity=0, tempActivity=0;
 		String maxUserId="None", tempUserId;
@@ -91,19 +121,7 @@ public class MovieFreak {
 		System.out.println("The most Active user id is "+ maxUserId);
 	}
 	
-	public void updateMovieRatings() {
-		int i=0, ratingValue=0;
-		String movieid;
-		
-		while (i < this.ratingList.size()) {
-			movieid = this.ratingList.get(i).getRatingMovieId();
-			ratingValue = this.ratingList.get(i).getRatingScore();
-			this.movieMap.get(movieid).updateRatings(ratingValue);
-			i++;
-		}
-	}
-	
-	public void getMostPopularMovie() {
+	public void getMostWatchedMovie() {
 		int tempNoOfRatings=0, maxNoOfRatings=0;
 		String tempMovieId, popMovieId="None";
 		this.updateMovieRatings();
@@ -117,6 +135,50 @@ public class MovieFreak {
 				maxNoOfRatings = tempNoOfRatings;
 		    }
 		}
-		System.out.println("The most popular movie id is "+ popMovieId);
+		System.out.println("The most watched movie id is "+ popMovieId);
 	}
+
+	public void getTopRankedMovie(Map<String,Movie> movieMap) {
+		String tempMovieId, topMovieId="None";
+		int tempAvgRating, maxAvgRating=0;
+		this.updateMovieRatings();
+		
+		Map<String,Movie> map = movieMap;
+		for (Map.Entry<String,Movie> entry : map.entrySet()) {
+			tempMovieId = entry.getKey();
+		    tempAvgRating = entry.getValue().getAverageRating();
+		    if (maxAvgRating < tempAvgRating) {
+		    	topMovieId = tempMovieId;
+		    	maxAvgRating = tempAvgRating;
+		    }
+		}
+		System.out.println("The top movie id for above selection is " + topMovieId + " with rating of " + maxAvgRating + ".");	
+	}
+	
+	@SuppressWarnings("unused")
+	public void getTopMovieByGenre() {
+		int genreIndex;
+		String genreName, tempMovieId;
+		Movie tempMovieValue;
+		
+		Map<Integer, Genre> map = this.genreMap;
+		for (Map.Entry<Integer, Genre> entry : map.entrySet()) {
+			genreIndex = entry.getKey();
+		    genreName = entry.getValue().getGenreName();
+		    
+		    Map<String, Movie> innermap = new HashMap<String, Movie>();
+		    innermap = this.movieMap;
+			for (Map.Entry<String,Movie> innerentry : innermap.entrySet()) {
+				tempMovieId = innerentry.getKey();
+			    tempMovieValue = innerentry.getValue();
+			    if ((genreName).equals(innerentry.getValue().getGenre())) {
+			    	innermap.put(tempMovieId, tempMovieValue);
+			    }
+			}
+			getTopRankedMovie(innermap);
+			System.out.println("The Selected Genre is: " + genreName + ".");
+			innermap=null;
+		}
+	}
+	
 }

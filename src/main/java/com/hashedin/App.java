@@ -11,6 +11,7 @@ public class App {
     	MovieFreak freak = new MovieFreak();
         System.out.println( "Hello World!" );
         freak.getMostActiveUser();
-        freak.getMostPopularMovie();
+        freak.getMostWatchedMovie();
+        freak.getTopMovieByGenre();
     }
 }

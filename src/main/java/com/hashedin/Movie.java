@@ -9,6 +9,7 @@ public class Movie {
 	private String url;
 	private int sumOfRatings;
 	private int noOfRatings;
+	private int averageRating;
 	private List<String> genre;
 	
 	public String getMovieId() {
@@ -53,9 +54,19 @@ public class Movie {
 	public void setGenre(List<String> genre) {
 		this.genre = genre;
 	}
+	public int getAverageRating() {
+		return averageRating;
+	}
+	public void setAverageRating(int averageRating) {
+		this.averageRating = averageRating;
+	}
+	
 	public void updateRatings(int ratingvalue) {
 		this.noOfRatings++;
 		this.sumOfRatings = this.sumOfRatings + ratingvalue;
+	}
+	public void updateAvgRating() {
+		this.averageRating = this.sumOfRatings / this.noOfRatings;
 	}
 	
 	@Override
@@ -66,17 +77,6 @@ public class Movie {
 				+ noOfRatings + ", genre=" + genre + "]";
 	}
 	
-	public Movie(String movieId, String title, String releaseDate, String url,
-			int sumOfRatings, int noOfRatings, List<String> genre) {
-		super();
-		this.movieId = movieId;
-		this.title = title;
-		this.releaseDate = releaseDate;
-		this.url = url;
-		this.sumOfRatings = sumOfRatings;
-		this.noOfRatings = noOfRatings;
-		this.genre= genre;
-	}
 	public Movie() {
 		super();
 		this.movieId = "";
@@ -85,6 +85,7 @@ public class Movie {
 		this.url = "";
 		this.sumOfRatings = 0;
 		this.noOfRatings = 0;
+		this.averageRating = 0;
 		this.genre = null;
 	}
 	

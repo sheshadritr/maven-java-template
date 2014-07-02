@@ -32,8 +32,6 @@ public class MovieManager {
 		mov.setTitle(token.nextToken());
 		mov.setReleaseDate(token.nextToken());
 		mov.setUrl(token.nextToken());
-		mov.setSumOfRatings(Integer.parseInt(token.nextToken()));
-		mov.setNoOfRatings(Integer.parseInt(token.nextToken()));
 		for(int i=0; i<=18; i++) {
 			if(token.nextToken().equals("1"))
 			{
