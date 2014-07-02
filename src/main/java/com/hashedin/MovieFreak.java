@@ -62,16 +62,22 @@ public class MovieFreak {
 		
 	}
 	
-
-	public void getMostActiveUser() {
-		int i=0, maxActivity=0, tempActivity=0;
-		String userid, maxUserId="None", tempUserId;
+	public void updateUserActivity() {
+		int i=0;
+		String userid;
 		
 		while (i < this.ratingList.size()) {
 			userid = this.ratingList.get(i).getRatingUserId();
 			this.userMap.get(userid).addActivity();
 			i++;
 		}
+	}
+
+	public void getMostActiveUser() {
+		int maxActivity=0, tempActivity=0;
+		String maxUserId="None", tempUserId;
+		
+		this.updateUserActivity();
 		
 		Map<String,User> map = this.userMap;
 		for (Map.Entry<String,User> entry : map.entrySet()) {
@@ -85,7 +91,32 @@ public class MovieFreak {
 		System.out.println("The most Active user id is "+ maxUserId);
 	}
 	
-	public void getMostPopularMovie() {
+	public void updateMovieRatings() {
+		int i=0, ratingValue=0;
+		String movieid;
 		
+		while (i < this.ratingList.size()) {
+			movieid = this.ratingList.get(i).getRatingMovieId();
+			ratingValue = this.ratingList.get(i).getRatingScore();
+			this.movieMap.get(movieid).updateRatings(ratingValue);
+			i++;
+		}
+	}
+	
+	public void getMostPopularMovie() {
+		int tempNoOfRatings=0, maxNoOfRatings=0;
+		String tempMovieId, popMovieId="None";
+		this.updateMovieRatings();
+		
+		Map<String,Movie> map = this.movieMap;
+		for (Map.Entry<String,Movie> entry : map.entrySet()) {
+			tempMovieId = entry.getKey();
+		    tempNoOfRatings = entry.getValue().getNoOfRatings();
+		    if (maxNoOfRatings < tempNoOfRatings) {
+		    	popMovieId = tempMovieId;
+				maxNoOfRatings = tempNoOfRatings;
+		    }
+		}
+		System.out.println("The most popular movie id is "+ popMovieId);
 	}
 }

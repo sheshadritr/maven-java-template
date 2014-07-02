@@ -53,6 +53,10 @@ public class Movie {
 	public void setGenre(List<String> genre) {
 		this.genre = genre;
 	}
+	public void updateRatings(int ratingvalue) {
+		this.noOfRatings++;
+		this.sumOfRatings = this.sumOfRatings + ratingvalue;
+	}
 	
 	@Override
 	public String toString() {
