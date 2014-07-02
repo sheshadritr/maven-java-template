@@ -1,8 +1,13 @@
 package com.hashedin;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
 
 
 public class MovieFreak {
@@ -56,40 +61,31 @@ public class MovieFreak {
 		this.ratingList = manager1.getRatingList(manager1.getClass().getClassLoader().getResourceAsStream("ratings.data"));
 		
 	}
-	public void getmostActiveUser() {
-		int i=0;
-		InputStream ratingline = 
-		List<String> rating = IOUtils.readLines(ratingline);
-		Integer[] rat = new Integer[rating.size()];
-		for(String item : rating){
-			Rating mrt = parseRatingDataFile(item);
-		    rat[i++] = mrt.getRatingUserId();
+	
+
+	public void getMostActiveUser() {
+		int i=0, maxActivity=0, tempActivity=0;
+		String userid, maxUserId="None", tempUserId;
+		
+		while (i < this.ratingList.size()) {
+			userid = this.ratingList.get(i).getRatingUserId();
+			this.userMap.get(userid).addActivity();
+			i++;
 		}
-		int max = maxelement(rat);
-		System.out.println("The most Active user is"+ max);
+		
+		Map<String,User> map = this.userMap;
+		for (Map.Entry<String,User> entry : map.entrySet()) {
+			tempUserId = entry.getKey();
+		    tempActivity = entry.getValue().getActivity();
+		    if (maxActivity < tempActivity) {
+				maxUserId = tempUserId;
+				maxActivity = tempActivity;
+		    }
+		}
+		System.out.println("The most Active user id is "+ maxUserId);
+	}
+	
+	public void getMostPopularMovie() {
 		
 	}
-	
-	
-/*	@SuppressWarnings("unchecked")
-	
-	private int maxelement(Integer[] rat) {
-		int count = 1, tempCount;
-		int popular = rat[0];
-		int temp = 0;
-		for (int i = 0; i < (rat.length - 1); i++) {
-			temp = rat[i];
-			tempCount = 0;
-			for (int j = 1; j < rat.length; j++) {
-				if (temp == rat[j])
-					tempCount++;
-			}
-			if (tempCount > count) {
-			    popular = temp;
-			    count = tempCount;
-			}
-		}
-		return popular;
-	}
-*/
 }

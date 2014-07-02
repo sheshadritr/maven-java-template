@@ -45,6 +45,9 @@ public class User {
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
+	public void addActivity() {
+		this.activity++;
+	}
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", age=" + age + ", gender=" + gender

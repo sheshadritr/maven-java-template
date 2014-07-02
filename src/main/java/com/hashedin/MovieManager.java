@@ -19,7 +19,7 @@ public class MovieManager {
 		for (String movie : movies) {
 			Movie mv = parseMovieDataFile(movie, genreMap);
 			movieMap.put(mv.getMovieId(), mv);
-			System.out.println(mv);
+			//System.out.println(mv);
 		}
 		return movieMap;
 	}

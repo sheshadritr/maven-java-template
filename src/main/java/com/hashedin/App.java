@@ -8,7 +8,9 @@ import java.io.IOException;
  */
 public class App {
     public static void main( String[] args ) throws IOException {
-    	MovieFreak freak1 = new MovieFreak();
+    	MovieFreak freak = new MovieFreak();
         System.out.println( "Hello World!" );
+        freak.getMostActiveUser();
+        freak.getMostPopularMovie();
     }
 }
