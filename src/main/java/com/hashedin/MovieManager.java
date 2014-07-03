@@ -10,9 +10,14 @@ import java.util.StringTokenizer;
 
 import org.apache.commons.io.IOUtils;
 
+/*
+ * This Class is the Manager of Movie Recommendation Engine App.
+ * Here the initial models of individual data sets are created after parsing their corresponding file.
+ * 
+ */
 public class MovieManager {
 
-	
+	/* These functions are used to create data model for Movie class in Movie.java */
 	public Map<String, Movie> getMovieMap(InputStream movieStream, Map<Integer, Genre> genreMap) throws IOException {
 		Map<String, Movie> movieMap = new HashMap<>();
 		@SuppressWarnings("unchecked")
@@ -48,7 +53,7 @@ public class MovieManager {
 		return mov;
 	}
 
-	
+	/* These functions are used to create data model for User class in User.java */
 	public Map<String, User> getUserMap(InputStream userStream) throws IOException {
 		Map<String, User> userMap = new HashMap<>();
 		@SuppressWarnings("unchecked")
@@ -71,7 +76,7 @@ public class MovieManager {
 		return u;
 	}
 
-	
+	/* These functions are used to create data model for Rating class in Rating.java */
 	public List<Rating> getRatingList(InputStream ratingStream) throws IOException {
 		List<Rating> ratingList = new ArrayList<Rating>();
 		@SuppressWarnings("unchecked")
@@ -95,7 +100,7 @@ public class MovieManager {
 		return r;
 	}
 	
-	
+	/* These functions are used to create data model for Genre class in Genre.java */
 	public Map<Integer, Genre> getGenreMap(InputStream genreStream) throws IOException {
 		Map<Integer, Genre> genreMap = new HashMap<>();
 		@SuppressWarnings("unchecked")
@@ -114,6 +119,5 @@ public class MovieManager {
 		g.setGenreIndex(Integer.parseInt(token.nextToken()));
 		return g;
 	}
-
 
 }

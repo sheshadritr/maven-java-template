@@ -36,17 +36,10 @@ public class AppTest
      * @throws IOException 
      */
     public void testApp() throws IOException {
-    	MovieManager mm = new MovieManager();
-    	Map<String, Movie> movieMap = mm.getMovies(mm.getClass().getClassLoader().getResourceAsStream("test_movie.data"));
-    	assertEquals(movieMap.size(),6);
+    	MovieFreak freak = new MovieFreak();
     	
-    	Map<String, User> userMap = mm.getUsers(mm.getClass().getClassLoader().getResourceAsStream("test_user.data"));
-    	assertEquals(userMap.size(),3);
-    	
-    	Map<String, Rating> ratingMap = mm.getRatings(mm.getClass().getClassLoader().getResourceAsStream("test_ratings.data"));
-    	assertEquals(ratingMap.size(),6);
-    	
-    	Map<String, Genre> genreMap = mm.getGenres(mm.getClass().getClassLoader().getResourceAsStream("test_genre.data"));
-    	assertEquals(genreMap.size(),19);
+        freak.getMostActiveUser();
+        freak.getMostWatchedMovie();
+        freak.getTopMovieByGenre();
     }
 }

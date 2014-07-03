@@ -1,6 +1,5 @@
 package com.hashedin;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,57 +7,55 @@ import java.util.Map;
 
 public class MovieFreak {
 	
-	private Map<String, Movie> movieMap;
-	private Map<String, User> userMap;
-	private List<Rating> ratingList;
-	private Map<Integer, Genre> genreMap;
+	private Map<String, Movie> freakMovieMap;
+	private Map<String, User> freakUserMap;
+	private List<Rating> freakRatingList;
+	private Map<Integer, Genre> freakGenreMap;
 	
-	public Map<String, Movie> getMovieMap() {
-		return movieMap;
+	public Map<String, Movie> getFreakMovieMap() {
+		return freakMovieMap;
 	}
-	public void setMovieMap(Map<String, Movie> movieMap) {
-		this.movieMap = movieMap;
+	public void setFreakMovieMap(Map<String, Movie> freakMovieMap) {
+		this.freakMovieMap = freakMovieMap;
 	}
-	public Map<String, User> getUserMap() {
-		return userMap;
+
+	public Map<String, User> getFreakUserMap() {
+		return freakUserMap;
 	}
-	public void setUserMap(Map<String, User> userMap) {
-		this.userMap = userMap;
-	}
-	public List<Rating> getRatingMap() {
-		return ratingList;
-	}
-	public void setRatingMap(List<Rating> ratingList) {
-		this.ratingList = ratingList;
-	}
-	public Map<Integer, Genre> getGenreMap() {
-		return genreMap;
-	}
-	public void setGenreMap(Map<Integer, Genre> genreMap) {
-		this.genreMap = genreMap;
+	public void setFreakUserMap(Map<String, User> freakUserMap) {
+		this.freakUserMap = freakUserMap;
 	}
 	
-	
+	public List<Rating> getFreakRatingList() {
+		return freakRatingList;
+	}
+	public void setFreakRatingList(List<Rating> freakRatingList) {
+		this.freakRatingList = freakRatingList;
+	}
+
+	public Map<Integer, Genre> getFreakGenreMap() {
+		return freakGenreMap;
+	}
+	public void setFreakGenreMap(Map<Integer, Genre> freakGenreMap) {
+		this.freakGenreMap = freakGenreMap;
+	}
+
 	public MovieFreak(Map<String, Movie> movieMap, Map<String, User> userMap,
 			List<Rating> ratingList, Map<Integer, Genre> genreMap) {
 		super();
-		this.movieMap = movieMap;
-		this.userMap = userMap;
-		this.ratingList = ratingList;
-		this.genreMap = genreMap;
+		this.freakMovieMap = movieMap;
+		this.freakUserMap = userMap;
+		this.freakRatingList = ratingList;
+		this.freakGenreMap = genreMap;
 	}
 	
-	public MovieFreak() throws IOException {
+	public MovieFreak() {
 		super();
-		MovieManager manager1 = new MovieManager();
-		this.genreMap = manager1.getGenreMap(manager1.getClass().getClassLoader().getResourceAsStream("genre.data"));
-		this.movieMap = manager1.getMovieMap(manager1.getClass().getClassLoader().getResourceAsStream("movie.data"), this.genreMap);
-		this.userMap = manager1.getUserMap(manager1.getClass().getClassLoader().getResourceAsStream("user.data"));
-		this.ratingList = manager1.getRatingList(manager1.getClass().getClassLoader().getResourceAsStream("ratings.data"));
-		
+		this.freakMovieMap = null;
+		this.freakUserMap = null;
+		this.freakRatingList = null;
+		this.freakGenreMap = null;
 	}
-	
-	
 	/*
 	 * 
 	 * Updation Functions
@@ -68,9 +65,9 @@ public class MovieFreak {
 		int i=0;
 		String userid;
 		
-		while (i < this.ratingList.size()) {
-			userid = this.ratingList.get(i).getRatingUserId();
-			this.userMap.get(userid).addActivity();
+		while (i < this.freakRatingList.size()) {
+			userid = this.freakRatingList.get(i).getRatingUserId();
+			this.freakUserMap.get(userid).addActivity();
 			i++;
 		}
 	}
@@ -79,14 +76,14 @@ public class MovieFreak {
 		int i=0, ratingValue=0;
 		String movieid;
 		
-		while (i < this.ratingList.size()) {
-			movieid = this.ratingList.get(i).getRatingMovieId();
-			ratingValue = this.ratingList.get(i).getRatingScore();
-			this.movieMap.get(movieid).updateRatings(ratingValue);
+		while (i < this.freakRatingList.size()) {
+			movieid = this.freakRatingList.get(i).getRatingMovieId();
+			ratingValue = this.freakRatingList.get(i).getRatingScore();
+			this.freakMovieMap.get(movieid).updateRatings(ratingValue);
 			i++;
 		}
 		
-		Map<String,Movie> map = this.movieMap;
+		Map<String,Movie> map = this.freakMovieMap;
 		for (Map.Entry<String,Movie> entry : map.entrySet()) {
 		    entry.getValue().updateAvgRating();
 		}
@@ -104,7 +101,7 @@ public class MovieFreak {
 		
 		this.updateUserActivity();
 		
-		Map<String,User> map = this.userMap;
+		Map<String,User> map = this.freakUserMap;
 		for (Map.Entry<String,User> entry : map.entrySet()) {
 			tempUserId = entry.getKey();
 		    tempActivity = entry.getValue().getActivity();
@@ -121,7 +118,7 @@ public class MovieFreak {
 		String tempMovieId, popMovieId="None";
 		this.updateMovieRatings();
 		
-		Map<String,Movie> map = this.movieMap;
+		Map<String,Movie> map = this.freakMovieMap;
 		for (Map.Entry<String,Movie> entry : map.entrySet()) {
 		    tempNoOfRatings = entry.getValue().getNoOfRatings();
 		    tempMovieId = entry.getValue().getTitle();
@@ -155,7 +152,7 @@ public class MovieFreak {
 		String tempMovieId, tempGenreValue;
 		Movie tempMovieValue;
 		
-		Map<String, Movie> innermap = this.movieMap;
+		Map<String, Movie> innermap = this.freakMovieMap;
 		for (Map.Entry<String,Movie> innerentry : innermap.entrySet()) {
 			tempMovieId = innerentry.getKey();
 			tempMovieValue = innerentry.getValue();
@@ -174,7 +171,7 @@ public class MovieFreak {
 	public void getTopMovieByGenre() {
 		String genreName;
 		
-		Map<Integer, Genre> map = this.genreMap;
+		Map<Integer, Genre> map = this.freakGenreMap;
 		for (Map.Entry<Integer, Genre> entry : map.entrySet()) {
 			Map<String, Movie> selectedmap = null;
 			selectedmap = new HashMap<String, Movie>();
